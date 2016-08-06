@@ -15,14 +15,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private WebView wv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        InitView();
+        ArticleLoadingTask articleLoadingTask = new ArticleLoadingTask(wv);
+        articleLoadingTask.execute(Costant.TODAYURL);
+    }
+
+    private void InitView(){
+        wv = (WebView) findViewById(R.id.wv);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -41,7 +52,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-//test
+        //test
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -51,7 +62,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -90,18 +100,23 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (id){
+            case R.id.todayArticle:
+                Toast.makeText(this,"today",Toast.LENGTH_SHORT).show();
+                ArticleLoadingTask articleLoadingTask = new ArticleLoadingTask(wv);
+                articleLoadingTask.execute(Costant.TODAYURL);
+                break;
+            case R.id.randomArticle:
+                Toast.makeText(this,"random",Toast.LENGTH_SHORT).show();
+                ArticleLoadingTask articleLoadingTask2 = new ArticleLoadingTask(wv);
+                articleLoadingTask2.execute(Costant.RANDOMURL);
+                break;
+            case R.id.help:
+                Toast.makeText(this,"help",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.about:
+                Toast.makeText(this,"about",Toast.LENGTH_SHORT).show();
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
