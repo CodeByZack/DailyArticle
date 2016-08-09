@@ -1,6 +1,7 @@
 package com.zack.dayilarticle;
 
 
+import android.os.Handler;
 import android.util.Log;
 
 import org.jsoup.Jsoup;
@@ -13,6 +14,13 @@ import java.io.IOException;
  * Created by zack on 2016/3/6.
  */
 public class parseH {
+
+    private static ArticleBean articleBean ;
+
+    public static ArticleBean getArticleBean() {
+        return articleBean;
+    }
+
     static String head ="<head>\n" +
             "<style>\n" +
             "body{padding:0;margin:0;background:#ffffff;}\n" +
@@ -45,8 +53,15 @@ public class parseH {
         context=context.replaceAll("<a.*/a>","");
         context=context.replaceAll("<p style.*/p>","");
         doc2 = Jsoup.parse(context);
-        String title = head+doc2.getElementsByAttributeValue("class","container").toString();
-        return title;
+        String title = doc2.getElementsByAttributeValue("class","articleTitle").text();
+        String author = doc2.getElementsByAttributeValue("class","articleAuthorName").text();
+        //String text = doc2.getElementsByAttributeValue("class","articleContent").toString();
+        //text = text.replace("<div class=\"articleContent\">","");
+        //text = text.replace("</div>","");
+        //text = text.replaceAll("<.*?>","");
+        String context_html = head+doc2.getElementsByAttributeValue("class","container").toString();
+        articleBean = new ArticleBean(title,context_html,author);
+        return context_html;
 
     }
 

@@ -1,10 +1,15 @@
 package com.zack.dayilarticle;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,20 +21,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private WebView wv;
+    private FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         InitView();
-        ArticleLoadingTask articleLoadingTask = new ArticleLoadingTask(wv);
+        ArticleLoadingTask articleLoadingTask = new ArticleLoadingTask(wv,fab,this);
         articleLoadingTask.execute(Costant.TODAYURL);
+
+//        }
     }
 
     private void InitView(){
@@ -43,11 +54,22 @@ public class MainActivity extends AppCompatActivity
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                SQliteTool tool = new SQliteTool(getBaseContext());
+                if(tool.isExist(parseH.getArticleBean())){
+                    tool.deleteData(parseH.getArticleBean());
+                    Snackbar.make(view, "取消收藏！！！", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    tool.colsedb();
+                    return;
+                }
+                tool.saveData(parseH.getArticleBean());
+                fab.setImageResource(R.drawable.ic_favorite_red_24dp);
+                tool.colsedb();
+                Snackbar.make(view, "收藏成功！！！", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -75,7 +97,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
         return true;
     }
 
@@ -85,11 +107,27 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.todayArticle:
+                Toast.makeText(this,"今日文章",Toast.LENGTH_SHORT).show();
+                ArticleLoadingTask articleLoadingTask = new ArticleLoadingTask(wv,fab,this);
+                articleLoadingTask.execute(Costant.TODAYURL);
+                break;
+            case R.id.randomArticle:
+                Toast.makeText(this,"随机文章",Toast.LENGTH_SHORT).show();
+                ArticleLoadingTask articleLoadingTask2 = new ArticleLoadingTask(wv,fab,this);
+                articleLoadingTask2.execute(Costant.RANDOMURL);
+                break;
+            case R.id.help:
+                Toast.makeText(this,"help",Toast.LENGTH_SHORT).show();
+                goLove();
+                break;
+            case R.id.about:
+                goAbout();
+                break;
         }
+        //noinspection SimplifiableIfStatement
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -102,20 +140,21 @@ public class MainActivity extends AppCompatActivity
 
         switch (id){
             case R.id.todayArticle:
-                Toast.makeText(this,"today",Toast.LENGTH_SHORT).show();
-                ArticleLoadingTask articleLoadingTask = new ArticleLoadingTask(wv);
+                Toast.makeText(this,"今日文章",Toast.LENGTH_SHORT).show();
+                ArticleLoadingTask articleLoadingTask = new ArticleLoadingTask(wv,fab,this);
                 articleLoadingTask.execute(Costant.TODAYURL);
                 break;
             case R.id.randomArticle:
-                Toast.makeText(this,"random",Toast.LENGTH_SHORT).show();
-                ArticleLoadingTask articleLoadingTask2 = new ArticleLoadingTask(wv);
+                Toast.makeText(this,"随机文章",Toast.LENGTH_SHORT).show();
+                ArticleLoadingTask articleLoadingTask2 = new ArticleLoadingTask(wv,fab,this);
                 articleLoadingTask2.execute(Costant.RANDOMURL);
                 break;
             case R.id.help:
                 Toast.makeText(this,"help",Toast.LENGTH_SHORT).show();
+                goLove();
                 break;
             case R.id.about:
-                Toast.makeText(this,"about",Toast.LENGTH_SHORT).show();
+                goAbout();
                 break;
         }
 
@@ -123,4 +162,15 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    private void goAbout(){
+        Intent it = new Intent(MainActivity.this,About.class);
+        startActivity(it);
+    }
+    private void goLove(){
+        Intent it = new Intent(MainActivity.this,Main2Activity.class);
+        startActivity(it);
+    }
+
+
+
 }

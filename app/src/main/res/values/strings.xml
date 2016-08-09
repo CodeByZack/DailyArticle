@@ -1,8 +1,15 @@
 <resources>
-    <string name="app_name">DayilArticle</string>
+    <string name="app_name">每日一文</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="about">关于每日一文</string>
+    <string name="about2">每日一文是一个简单的中文阅读网站。
+        \n\n没有繁复的登录注册，没有复杂的算法，不猜你喜欢。 我们相信阅读和人之间微妙的关系。
+        \n\n每天花10分钟阅读一篇文章，一个月可以有大约50000字的阅读量，一年有近60万字的阅读量，专注、执着，每天阅读。
+        \n\n只为简单的纯净的阅读而生。
+        \n\n简单生活，每日一文。</string>
+    <string name="zack">本应用为【每日一文】网站的非官方客户端.</string>
+    <string name="zack2">开发者：ZACK.</string>
     <string name="action_settings">Settings</string>
 </resources>

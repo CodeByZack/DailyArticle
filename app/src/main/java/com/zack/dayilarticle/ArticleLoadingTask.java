@@ -1,6 +1,8 @@
 package com.zack.dayilarticle;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.webkit.WebView;
 
 import java.io.IOException;
@@ -10,10 +12,15 @@ import java.io.IOException;
  */
 public class ArticleLoadingTask  extends AsyncTask<String,Void,Void>{
 
+    private  FloatingActionButton fab;
     private WebView wv;
     private String article = null;
-    public ArticleLoadingTask(WebView wv) {
+    private Context context;
+
+    public ArticleLoadingTask(WebView wv, FloatingActionButton fab,Context context) {
         this.wv = wv;
+        this.fab = fab;
+        this.context = context;
     }
 
 
@@ -31,5 +38,13 @@ public class ArticleLoadingTask  extends AsyncTask<String,Void,Void>{
     @Override
     protected void onPostExecute(Void aVoid) {
         wv.loadDataWithBaseURL(null, article, "text/html", "utf-8",null);
+        SQliteTool tool = new SQliteTool(context);
+        if(tool.isExist(parseH.getArticleBean())){
+            fab.setImageResource(R.drawable.ic_favorite_red_24dp);
+        }
+        else {
+            fab.setImageResource(R.drawable.ic_favorite_black_24dp);
+        }
+        tool.colsedb();
     }
 }
