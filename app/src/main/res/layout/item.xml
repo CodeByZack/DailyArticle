@@ -13,6 +13,8 @@
         app:cardElevation="5dp"
         app:contentPadding="10dp"
         android:layout_margin="4dp"
+        android:id="@+id/cdView"
+        android:foreground="@drawable/selector"
         app:cardBackgroundColor="@color/cardview_light_background"
         >
         <TextView

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -61,15 +61,16 @@ public class MainActivity extends AppCompatActivity
                 SQliteTool tool = new SQliteTool(getBaseContext());
                 if(tool.isExist(parseH.getArticleBean())){
                     tool.deleteData(parseH.getArticleBean());
-                    Snackbar.make(view, "取消收藏！！！", Snackbar.LENGTH_LONG)
+                    Snackbar.make(view, "取消收藏！！！", Snackbar.LENGTH_SHORT)
                             .setAction("Action", null).show();
                     tool.colsedb();
+                    fab.setImageResource(R.drawable.ic_grade_white_24dp);
                     return;
                 }
                 tool.saveData(parseH.getArticleBean());
-                fab.setImageResource(R.drawable.ic_favorite_red_24dp);
+                fab.setImageResource(R.drawable.ic_grade_red_24dp);
                 tool.colsedb();
-                Snackbar.make(view, "收藏成功！！！", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "收藏成功！！！", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
         });
@@ -118,9 +119,11 @@ public class MainActivity extends AppCompatActivity
                 ArticleLoadingTask articleLoadingTask2 = new ArticleLoadingTask(wv,fab,this);
                 articleLoadingTask2.execute(Costant.RANDOMURL);
                 break;
-            case R.id.help:
-                Toast.makeText(this,"help",Toast.LENGTH_SHORT).show();
+            case R.id.collect:
                 goLove();
+                break;
+            case R.id.help:
+                goHelp();
                 break;
             case R.id.about:
                 goAbout();
@@ -149,9 +152,11 @@ public class MainActivity extends AppCompatActivity
                 ArticleLoadingTask articleLoadingTask2 = new ArticleLoadingTask(wv,fab,this);
                 articleLoadingTask2.execute(Costant.RANDOMURL);
                 break;
-            case R.id.help:
-                Toast.makeText(this,"help",Toast.LENGTH_SHORT).show();
+            case R.id.collect:
                 goLove();
+                break;
+            case R.id.help:
+                goHelp();
                 break;
             case R.id.about:
                 goAbout();
@@ -168,6 +173,10 @@ public class MainActivity extends AppCompatActivity
     }
     private void goLove(){
         Intent it = new Intent(MainActivity.this,Main2Activity.class);
+        startActivity(it);
+    }
+    private void goHelp(){
+        Intent it = new Intent(MainActivity.this,Main4Activity.class);
         startActivity(it);
     }
 

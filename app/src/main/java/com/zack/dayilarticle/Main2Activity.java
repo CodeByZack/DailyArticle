@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +17,7 @@ import android.widget.SimpleAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main2Activity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class Main2Activity extends AppCompatActivity implements AdapterView.OnItemClickListener,AdapterView.OnItemLongClickListener{
 
     private ListView listView;
     private List<ArticleBean> mData ;
@@ -33,6 +36,14 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
         adpter = new myAdapter(mData,this);
         listView.setAdapter(adpter);
         listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
     @Override
@@ -51,7 +62,34 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
                 finish();
                 return true;
 
+            case R.id.delete:
+                for (int i = 0; i < mData.size() ; i++) {
+                    ArticleBean b = mData.get(i);
+                    if(b.isSelected()){
+                        SQliteTool tool = new SQliteTool(this);
+                        tool.deleteData(b);
+                        tool.colsedb();
+                        mData.remove(i);
+                        i--;
+                    }
+                }
+                adpter.notifyDataSetChanged();
+                break;
+
+
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        ArticleBean b = mData.get(position);
+        if(b.isSelected()){
+            b.setSeclected(false);
+        }else {
+            b.setSeclected(true);
+        }
+        adpter.notifyDataSetChanged();
+        return true;
     }
 }

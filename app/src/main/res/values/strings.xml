@@ -9,6 +9,7 @@
         \n\n每天花10分钟阅读一篇文章，一个月可以有大约50000字的阅读量，一年有近60万字的阅读量，专注、执着，每天阅读。
         \n\n只为简单的纯净的阅读而生。
         \n\n简单生活，每日一文。</string>
+    <string name="help">使用帮助：\n    如果遇到喜欢的文章，点击主界面右下角五星按钮可收藏文章。再次点击取消收藏。\n    收藏的文章可在收藏列表中进行查看，点击可查看文章，长按选定条目，可在菜单中删除选定的条目。</string>
     <string name="zack">本应用为【每日一文】网站的非官方客户端.</string>
     <string name="zack2">开发者：ZACK.</string>
     <string name="action_settings">Settings</string>

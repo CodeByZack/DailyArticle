@@ -3,6 +3,7 @@ package com.zack.dayilarticle;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,13 +55,20 @@ public class myAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         }
         else {
+
             viewHolder= (ViewHolder) convertView.getTag();
+        }ArticleBean item=mData.get(position);
+        CardView cd = (CardView) convertView.findViewById(R.id.cdView);
+        if(item.isSelected()){
+            cd.setSelected(true);
+        }
+        else {
+            cd.setSelected(false);
         }
 
 
 
 
-        ArticleBean item=mData.get(position);
         viewHolder.title.setText(item.getTitle());
         viewHolder.author.setText(item.getAuthor());
         return convertView;

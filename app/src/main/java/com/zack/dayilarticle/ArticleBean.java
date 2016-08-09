@@ -7,7 +7,7 @@ public class ArticleBean {
     private String title;
     private String author;
     private String context_html;
-
+    private boolean isSelected ;
     public ArticleBean() {
     }
 
@@ -15,6 +15,15 @@ public class ArticleBean {
         this.title = title;
         this.context_html = context_html;
         this.author = author;
+        isSelected = false;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSeclected(boolean exist) {
+        isSelected = exist;
     }
 
     public String getTitle() {

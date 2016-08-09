@@ -6,6 +6,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.zack.dayilarticle.Main2Activity">
     <ListView
+
         android:divider="@null"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

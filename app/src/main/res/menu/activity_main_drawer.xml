@@ -4,19 +4,24 @@
 
         <item
             android:id="@+id/todayArticle"
-            android:icon="@drawable/today"
+            android:icon="@android:drawable/ic_menu_today"
             android:title="今日文章" />
         <item
             android:id="@+id/randomArticle"
-            android:icon="@drawable/random"
+            android:icon="@android:drawable/ic_menu_rotate"
             android:title="随机文章" />
         <item
-            android:id="@+id/help"
-            android:icon="@drawable/help"
+
+            android:id="@+id/collect"
+            android:icon="@android:drawable/ic_menu_agenda"
             android:title="查看收藏" />
         <item
+            android:id="@+id/help"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="帮助信息" />
+        <item
             android:id="@+id/about"
-            android:icon="@drawable/about"
+            android:icon="@android:drawable/ic_menu_info_details"
             android:title="关于软件" />
 
 </menu>

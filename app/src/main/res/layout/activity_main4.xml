@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.zack.dayilarticle.Main4Activity">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:contentPadding="10dp"
+        android:layout_margin="4dp"
+        android:id="@+id/help1">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="主界面：\n    右下角五星图标可收藏文章。再次点击取消收藏。"
+            />
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_below="@+id/help1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:contentPadding="10dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_margin="4dp"
+        android:id="@+id/help2">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="收藏列表：\n    点击打开条目，长按选择条目。可在菜单中对选择的条目进行删除。"
+            />
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_below="@+id/help2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:contentPadding="10dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_margin="4dp"
+
+        android:id="@+id/help3">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="意见反馈：\n    如果你对此app任何建议或者想法，请联系958059970@qq.com"
+            />
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_below="@+id/help3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:contentPadding="10dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_margin="4dp"
+
+        android:id="@+id/help4">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="捐赠：\n     如果你喜欢本软件或者对你有一定的价值，你可随意捐赠:15680487267(支付宝账号)。你的捐赠将鼓励我继续完善和提高该APP的实用价值。感谢那些捐助过我的人！"
+            />
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
