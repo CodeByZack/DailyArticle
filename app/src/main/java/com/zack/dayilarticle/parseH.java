@@ -39,13 +39,11 @@ public class parseH {
             doc2 = Jsoup.connect(url).get();
         }
         catch (Exception e){
-            Log.d("doc2", "网络连接失败！");
             return "<p>网络连接失败！</p>";
         }
 
         //if(doc2.toString()==null)return  null;
         String context = doc2.body().toString();
-        Log.d("doc2", context);
         context=context.replace("id=\"article_show\"", "class=\"container\"");
         context=context.replace("article_author", "articleAuthorName");
         context=context.replace("article_text", "articleContent");

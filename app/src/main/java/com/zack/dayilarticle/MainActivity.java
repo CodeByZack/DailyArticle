@@ -4,12 +4,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,10 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.webkit.WebView;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.List;
+
 
 
 public class MainActivity extends AppCompatActivity
@@ -40,20 +35,15 @@ public class MainActivity extends AppCompatActivity
         ArticleLoadingTask articleLoadingTask = new ArticleLoadingTask(wv,fab,this);
         articleLoadingTask.execute(Costant.TODAYURL);
 
-//        }
     }
 
     private void InitView(){
         wv = (WebView) findViewById(R.id.wv);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
+        if(VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
-
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +91,6 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -179,7 +168,4 @@ public class MainActivity extends AppCompatActivity
         Intent it = new Intent(MainActivity.this,Main4Activity.class);
         startActivity(it);
     }
-
-
-
 }
