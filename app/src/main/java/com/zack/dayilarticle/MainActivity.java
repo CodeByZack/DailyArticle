@@ -48,20 +48,9 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SQliteTool tool = new SQliteTool(getBaseContext());
-                if(tool.isExist(parseH.getArticleBean())){
-                    tool.deleteData(parseH.getArticleBean());
-                    Snackbar.make(view, "取消收藏！！！", Snackbar.LENGTH_SHORT)
-                            .setAction("Action", null).show();
-                    tool.colsedb();
-                    fab.setImageResource(R.drawable.ic_grade_white_24dp);
-                    return;
-                }
-                tool.saveData(parseH.getArticleBean());
-                fab.setImageResource(R.drawable.ic_grade_red_24dp);
-                tool.colsedb();
-                Snackbar.make(view, "收藏成功！！！", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
+                Toast.makeText(MainActivity.this,"随机文章",Toast.LENGTH_SHORT).show();
+                ArticleLoadingTask articleLoadingTask2 = new ArticleLoadingTask(wv,fab,MainActivity.this);
+                articleLoadingTask2.execute(Costant.RANDOMURL);
             }
         });
 
@@ -88,7 +77,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
+        getMenuInflater().inflate(R.menu.collect, menu);
         return true;
     }
     @Override
@@ -116,6 +105,17 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.about:
                 goAbout();
+                break;
+            case R.id.collect_article:
+                SQliteTool tool = new SQliteTool(getBaseContext());
+                if(tool.isExist(parseH.getArticleBean())){
+                    tool.colsedb();
+                    Toast.makeText(MainActivity.this,"文章已收藏！！！",Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                tool.saveData(parseH.getArticleBean());
+                tool.colsedb();
+                Toast.makeText(MainActivity.this,"收藏成功！！！",Toast.LENGTH_SHORT).show();
                 break;
         }
         //noinspection SimplifiableIfStatement

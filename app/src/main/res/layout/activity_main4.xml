@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="主界面：\n    右下角五星图标可收藏文章。再次点击取消收藏。"
+            android:text="主界面：\n    点击右下角图标，可随机一篇文章进行阅读。"
             />
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView

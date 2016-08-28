@@ -24,7 +24,7 @@ public class parseH {
 
 
 
-    
+
     static String head ="<head>\n" +
             "<style>\n" +
             "body{padding:0;margin:0;background:#ffffff;}\n" +

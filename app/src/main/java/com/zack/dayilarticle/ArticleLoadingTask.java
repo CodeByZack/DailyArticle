@@ -38,13 +38,5 @@ public class ArticleLoadingTask  extends AsyncTask<String,Void,Void>{
     @Override
     protected void onPostExecute(Void aVoid) {
         wv.loadDataWithBaseURL(null, article, "text/html", "utf-8",null);
-        SQliteTool tool = new SQliteTool(context);
-        if(tool.isExist(parseH.getArticleBean())){
-            fab.setImageResource(R.drawable.ic_grade_red_24dp);
-        }
-        else {
-            fab.setImageResource(R.drawable.ic_grade_white_24dp);
-        }
-        tool.colsedb();
     }
 }
