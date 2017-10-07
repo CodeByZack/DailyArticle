@@ -57,14 +57,14 @@ public class parseH {
         doc2 = Jsoup.parse(context);
         String title = doc2.getElementsByAttributeValue("class","articleTitle").text();
         String author = doc2.getElementsByAttributeValue("class","articleAuthorName").text();
-        //String text = doc2.getElementsByAttributeValue("class","articleContent").toString();
-        //text = text.replace("<div class=\"articleContent\">","");
-        //text = text.replace("</div>","");
-        //text = text.replaceAll("<.*?>","");
+//        String text = doc2.getElementsByAttributeValue("class","articleContent").toString();
+//        text = text.replace("<div class=\"articleContent\">","");
+//        text = text.replace("</div>","");
+//        text = text.replaceAll("<.*?>","");
         String context_html = head+doc2.getElementsByAttributeValue("class","container").toString();
         articleBean = new ArticleBean(title,context_html,author);
+        //return context_html;
         return context_html;
-
     }
 
 

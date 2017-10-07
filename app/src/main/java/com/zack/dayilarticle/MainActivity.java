@@ -4,8 +4,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+
 import android.support.design.widget.Snackbar;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,10 +17,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.melnykov.fab.FloatingActionButton;
+import com.melnykov.fab.ObservableScrollView;
 
 
 public class MainActivity extends AppCompatActivity
@@ -27,6 +33,7 @@ public class MainActivity extends AppCompatActivity
 
     private WebView wv;
     private FloatingActionButton fab;
+    private ObservableScrollView scrollView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +46,8 @@ public class MainActivity extends AppCompatActivity
 
     private void InitView(){
         wv = (WebView) findViewById(R.id.wv);
+        scrollView = (ObservableScrollView) findViewById(R.id.scrollView);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -53,7 +62,7 @@ public class MainActivity extends AppCompatActivity
                 articleLoadingTask2.execute(Costant.RANDOMURL);
             }
         });
-
+        fab.attachToScrollView( scrollView);
         //test
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -63,6 +72,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
     @Override
     public void onBackPressed() {
